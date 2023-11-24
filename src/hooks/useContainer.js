@@ -1,11 +1,10 @@
 import { useCallback, useEffect, useRef } from "preact/hooks";
 import { eventManager } from "../core/eventManager"
 import { toast as TOASTS } from "../core/toast";
-import { ADD_TOAST, REMOVE_TOAST, UPDATE_TOAST } from "../store/store";
-import { useStore } from "../store/store";
+import { ADD_TOAST, REMOVE_TOAST, UPDATE_TOAST, memoryState } from "../store/store";
 
 export function useToastContainer(props) {
-    const toasts = useStore().toasts;
+    const toasts = memoryState.value.toasts;
     const isToastActive = (id) => toasts.find(t => t.toastId === id)?.visible;
     const instance = useRef({
         toastKey: 1,

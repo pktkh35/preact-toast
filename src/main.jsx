@@ -1,5 +1,4 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
+import { render } from 'preact'
 import Container from './Container'
 import './style/test.scss'
 import './style/notify.scss'
@@ -98,4 +97,4 @@ document.addEventListener("keyup", key => {
     }
 })
 
-ReactDOM.createRoot(document.getElementById('root')).render(<Container />)
+render(<Container />, document.getElementById('root'))

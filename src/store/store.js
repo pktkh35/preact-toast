@@ -1,7 +1,6 @@
-import { useEffect, useState } from "preact/hooks";
+import { signal } from "@preact/signals";
 
-let memoryState = { toasts: [] }
-const listeners = [];
+export let memoryState = signal({ toasts: [] })
 
 export const reducer = (state, actionType, payload) => {
     switch (actionType) {
@@ -29,16 +28,9 @@ export const reducer = (state, actionType, payload) => {
 };
 
 export const dispatch = (type, payload) => {
-    memoryState = reducer(memoryState, type, payload);
-    listeners.forEach((listener) => {
-      listener(memoryState);
-    });
+    memoryState.value = reducer(memoryState.value, type, payload);
 }
 
 export const ADD_TOAST = (payload) => dispatch("ADD_TOAST", payload);
 export const REMOVE_TOAST = (payload) => dispatch("REMOVE_TOAST", payload);
 export const UPDATE_TOAST = (payload) => dispatch("UPDATE_TOAST", payload);
-
-export const useStore = () => {
-  return memoryState.value;
-};
