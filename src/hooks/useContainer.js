@@ -4,8 +4,7 @@ import { toast as TOASTS } from "../core/toast";
 import { ADD_TOAST, REMOVE_TOAST, UPDATE_TOAST, memoryState } from "../store/store";
 
 export function useToastContainer(props) {
-    const toasts = memoryState.value.toasts;
-    const isToastActive = (id) => toasts.find(t => t.toastId === id)?.visible;
+    const isToastActive = (id) => memoryState.value.toasts.find(t => t.toastId === id)?.visible;
     const instance = useRef({
         toastKey: 1,
         displayedToast: 0,
@@ -14,8 +13,8 @@ export function useToastContainer(props) {
         props,
         containerId: null,
         isToastActive,
-        getToast: id => toasts.find(t => t.toastId === id),
-        getToastFromKeyName: (keyName, key) => toasts.find(t => t[keyName] === key)
+        getToast: id => memoryState.value.toasts.find(t => t.toastId === id),
+        getToastFromKeyName: (keyName, key) => memoryState.value.toasts.find(t => t[keyName] === key)
     }).current;
 
     useEffect(() => {
@@ -35,8 +34,8 @@ export function useToastContainer(props) {
     useEffect(() => {
         instance.props = props;
         instance.isToastActive = isToastActive;
-        instance.displayedToast = toasts.length;
-    }, [props, isToastActive, toasts]);
+        instance.displayedToast = memoryState.value.toasts.length;
+    }, [props, isToastActive, memoryState]);
 
     function DismissToast(toastId) {
         UPDATE_TOAST({
@@ -122,7 +121,7 @@ export function useToastContainer(props) {
 
     const getToastToRender = cb => {
         const toRender = new Map();
-        const collection = toasts;
+        const collection = memoryState.value.toasts;
 
         collection.forEach(toast => {
             const position = toast?.position || "top-right";
@@ -136,14 +135,14 @@ export function useToastContainer(props) {
     }
 
     const calculateOffset = useCallback(toast => {
-        const relevantToasts = toasts.filter(t => (t?.position || "top-right") === (toast?.position || "top-right")).sort((a, b) => a.priority - b.priority);
+        const relevantToasts = memoryState.value.toasts.filter(t => (t?.position || "top-right") === (toast?.position || "top-right")).sort((a, b) => a.priority - b.priority);
         const toastIndex = relevantToasts.findIndex((t) => t.toastId === toast.toastId);
         const toastsBefore = relevantToasts.filter((t, i) => i < toastIndex && t.visible).length;
 
         const offset = relevantToasts.filter((t) => t.visible).slice(toastsBefore + 1).reduce((acc, t) => acc + (t.height || 0) + 8, 0);
 
         return offset
-    }, [toasts])
+    }, [memoryState])
 
     return {
         getToastToRender,
