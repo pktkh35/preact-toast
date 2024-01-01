@@ -43,6 +43,7 @@ function dispatchToast(
  */
 function mergeOptions(type, options) {
   return {
+    duration: 5000,
     ...options,
     type: (options && options.type) || type,
     toastId: getToastId(options)
