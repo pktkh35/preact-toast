@@ -1,3 +1,4 @@
+import * as React from 'preact';
 import { useCallback, useEffect, useRef } from 'preact/hooks';
 import { getIcon } from './Icons';
 

@@ -1,3 +1,4 @@
+import * as React from 'preact';
 import { isFn, isNum, isStr } from '../utils/propValidator';
 
 const Svg = ({ theme, type, children }) => (

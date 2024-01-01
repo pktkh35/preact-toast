@@ -1,3 +1,4 @@
+import * as React from 'preact';
 import { isStr, isNum } from '../utils/propValidator';
 import { eventManager } from './eventManager';
 

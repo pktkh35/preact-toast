@@ -1,3 +1,4 @@
+import * as React from 'preact';
 import { useState } from 'preact/hooks'
 
 const Image = ({

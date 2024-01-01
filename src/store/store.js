@@ -1,3 +1,4 @@
+import * as React from 'preact';
 import { signal } from "@preact/signals";
 
 export let memoryState = signal({ toasts: [] })

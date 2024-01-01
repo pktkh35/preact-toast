@@ -1,3 +1,4 @@
+import * as React from 'preact';
 export const eventManager = {
     list: new Map(),
     emitQueue: new Map(),

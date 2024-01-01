@@ -1,3 +1,4 @@
+import * as React from 'preact';
 import { useToastContainer } from "./hooks/useContainer";
 import { Toast } from "./components/Toast";
 
