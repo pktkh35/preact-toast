@@ -98,16 +98,19 @@ export const Toast = (toastData) => {
             opacity: (visible) ? 1 : 0
         }}>
             <div className="toast-icon" style={{
-                animationName: (visible && !toastData.hide) ? `athens-zoomIn` : `athens-zoomOut`,
-                animationTimingFunction: (visible && !toastData.hide) ? `cubic-bezier(.21,1.02,.73,1)` : `cubic-bezier(.21,1.02,.73,1)`,
-                animationFillMode: "forwards",
-                animationDuration: ".4s",
                 transition: ".23s",
                 transitionDelay: (visible && !toastData.hide) ? ".23s" : "0s",
-                animationDelay: (visible && !toastData.hide) ? ".23s" : "0s",
                 opacity: (visible) ? 1 : 0
             }}>
-                {toastData.icon ? toastData.icon : getIcon({ type })}
+                <div className="toast-icon-container" style={{
+                    animationName: (visible && !toastData.hide) ? `athens-zoomIn` : `athens-zoomOut`,
+                    animationTimingFunction: (visible && !toastData.hide) ? `cubic-bezier(.21,1.02,.73,1)` : `cubic-bezier(.21,1.02,.73,1)`,
+                    animationFillMode: "forwards",
+                    animationDuration: ".4s",
+                    animationDelay: (visible && !toastData.hide) ? ".23s" : "0s",
+                }}>
+                    {toastData.icon ? toastData.icon : getIcon({ type })}
+                </div>
             </div>
             <div className="toast-info">
                 {
